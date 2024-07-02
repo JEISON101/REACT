@@ -1,0 +1,26 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.texto {
+  color: lightblue;
+}
+
+.boton {
+  color: lightcoral;
+}
+
+.boton:hover {
+  color: lightgreen;
+}
