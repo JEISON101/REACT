@@ -5,30 +5,3 @@
   background-color: grey;
   border-radius: 10px;
 }
-
-.boton1 {
-  border: none;
-  margin: 10px;
-  background-color: green;
-  color: black;
-}
-.boton2 {
-  border: none;
-  color: black;
-  margin: 10px;
-  background-color: red;
-}
-.boton3 {
-  border: none;
-  color: black;
-  margin: 10px;
-  background-color: yellow;
-}
-
-button:hover {
-  opacity: 0.5;
-}
-
-.tiempo {
-  font-size: 40px;
-}

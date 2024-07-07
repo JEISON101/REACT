@@ -5,20 +5,20 @@ const App = () => {
 
   const [segundos, setSegundos] = useState(0);
   const [corriendo, setCorriendo] = useState(false);
-  const [intervalo, setIntervalo] = useState(null);
+  const [intervalo, setIntervalId] = useState(null);
 
   useEffect(() => {
     if (corriendo) {
       const id = setInterval(() => {
         setSegundos(segundos => segundos + 1);
       }, 1000);
-      setIntervalo(id);
+      setIntervalId(id);
     } else {
       clearInterval(intervalo);
     }
 
     return () => {
-      clearInterval(intervalo);
+      clearInterval(interval);
     };
   }, [corriendo]);
 
