@@ -1,44 +1,35 @@
-import React, {useState} from 'react';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'; 
 
-const App = () => {
-  const [inputValue, setInputValue] = useState(''); 
-  const [elementos, setElementos] = useState([]); 
+const Progreso = () => {
+  const [porcentaje, setPorcentaje] = useState(0); 
 
-  const agregar = () => {
-    if (inputValue.trim() !== '') {
-      setElementos([...elementos, inputValue]); 
-      setInputValue(''); 
+  const handleChange = (event) => {
+    let valor = event.target.value;
+
+    if (valor < 0) {
+      valor = 0;
+    } else if (valor > 100) {
+      valor = 100;
     }
-  };
-
-  const eliminar = (index) => {
-    const nuevosElementos = elementos.filter((_, i) => i !== index);
-    setElementos(nuevosElementos); 
+    setPorcentaje(valor); 
   };
 
   return (
-    <div>
+    <div className="contenedor">
       <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Ciudad"
+        type="number"
+        value={porcentaje}
+        onChange={handleChange}
+        min="0"
+        max="100"
+        placeholder="Ingresa un porcentaje (1-100)"
       />
-      <button onClick={agregar}>Agregar</button>
-
-      <h2>Ciudades</h2>
-      
-      <ul>
-        {elementos.map((elemento, index) => (
-          <li key={index}>
-            {elemento}
-            <button className='eliminar' onClick={() => eliminar(index)}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
+      <div className="barra">
+        <div className="progreso-barra" style={{ width: `${porcentaje}%` }}>{porcentaje}%</div>
+      </div>
     </div>
   );
 };
 
-export default App;
+export default Progreso;
