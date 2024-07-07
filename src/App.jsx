@@ -1,46 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import './App.css';
 
 const App = () => {
+  const [inputValue, setInputValue] = useState(''); 
+  const [elementos, setElementos] = useState([]); 
 
-  const [segundos, setSegundos] = useState(0);
-  const [corriendo, setCorriendo] = useState(false);
-  const [intervalo, setIntervalId] = useState(null);
-
-  useEffect(() => {
-    if (corriendo) {
-      const id = setInterval(() => {
-        setSegundos(segundos => segundos + 1);
-      }, 1000);
-      setIntervalId(id);
-    } else {
-      clearInterval(intervalo);
+  const agregar = () => {
+    if (inputValue.trim() !== '') {
+      setElementos([...elementos, inputValue]); 
+      setInputValue(''); 
     }
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [corriendo]);
-
-  function iniciarConteo() {
-    setCorriendo(true);
   };
 
-  function detenerConteo() {
-    setCorriendo(false);
-  };
-
-  function restaurarConteo() {
-    setSegundos(0);
+  const eliminar = (index) => {
+    const nuevosElementos = elementos.filter((_, i) => i !== index);
+    setElementos(nuevosElementos); 
   };
 
   return (
     <div>
-      <h2 className='tiempo'>Tiempo</h2>
-      <p>{Math.floor(segundos / 60)} minutos {segundos % 60} segundos</p>
-      <button onClick={iniciarConteo} className='boton1'>Iniciar</button>
-      <button onClick={detenerConteo} className='boton2'>Detener</button>
-      <button onClick={restaurarConteo} className='boton3'>Restaurar</button>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Ciudad"
+      />
+      <button onClick={agregar}>Agregar</button>
+
+      <h2>Ciudades</h2>
+      
+      <ul>
+        {elementos.map((elemento, index) => (
+          <li key={index}>
+            {elemento}
+            <button className='eliminar' onClick={() => eliminar(index)}>Eliminar</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
