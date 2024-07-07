@@ -1,26 +1,34 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 30px;
+  padding: 10px;
   text-align: center;
+  background-color: grey;
+  border-radius: 10px;
 }
 
-.card {
-  padding: 2em;
+.boton1 {
+  border: none;
+  margin: 10px;
+  background-color: green;
+  color: black;
+}
+.boton2 {
+  border: none;
+  color: black;
+  margin: 10px;
+  background-color: red;
+}
+.boton3 {
+  border: none;
+  color: black;
+  margin: 10px;
+  background-color: yellow;
 }
 
-.read-the-docs {
-  color: #888;
+button:hover {
+  opacity: 0.5;
 }
 
-.texto {
-  color: lightblue;
-}
-
-.boton {
-  color: lightcoral;
-}
-
-.boton:hover {
-  color: lightgreen;
+.tiempo {
+  font-size: 40px;
 }

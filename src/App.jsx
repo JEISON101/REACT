@@ -1,18 +1,48 @@
-import { useState } from 'react'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import './App.css';
 
-function App() {
+const App = () => {
 
-let [isbuttondisable, setingsbuttondisable] = useState(false)
+  const [segundos, setSegundos] = useState(0);
+  const [corriendo, setCorriendo] = useState(false);
+  const [intervalo, setIntervalo] = useState(null);
+
+  useEffect(() => {
+    if (corriendo) {
+      const id = setInterval(() => {
+        setSegundos(segundos => segundos + 1);
+      }, 1000);
+      setIntervalo(id);
+    } else {
+      clearInterval(intervalo);
+    }
+
+    return () => {
+      clearInterval(intervalo);
+    };
+  }, [corriendo]);
+
+  function iniciarConteo() {
+    setCorriendo(true);
+  };
+
+  function detenerConteo() {
+    setCorriendo(false);
+  };
+
+  function restaurarConteo() {
+    setSegundos(0);
+  };
 
   return (
-    <>
-      <button className='boton' onClick={() => setingsbuttondisable(!isbuttondisable)}>
-        {isbuttondisable ? "Ocultar" : "Mostrar"}
-      </button>
-      {isbuttondisable? <h1 className='texto'>BIENVENIDO</h1> : null }
-    </>
-  )
-}
+    <div>
+      <h2 className='tiempo'>Tiempo</h2>
+      <p>{Math.floor(segundos / 60)} minutos {segundos % 60} segundos</p>
+      <button onClick={iniciarConteo} className='boton1'>Iniciar</button>
+      <button onClick={detenerConteo} className='boton2'>Detener</button>
+      <button onClick={restaurarConteo} className='boton3'>Restaurar</button>
+    </div>
+  );
+};
 
-export default App
+export default App;
