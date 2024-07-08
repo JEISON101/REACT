@@ -1,72 +1,35 @@
 import React, { useState } from 'react';
 import './App.css'; 
 
- 
-const persona = {
-  usuario: "",
-  nombre: "",
-  edad: ""
-};
-
 export default function App() {
-  const [form, setValues] = useState(persona);
-  const [display, setDisplay] = useState(false);
+  const [count, setCount] = React.useState(0)
+  const [timeLeft, setTimeLeft] = React.useState(10)
+  const id = React.useRef(null)
 
-  const printValues = (e) => {
-    e.preventDefault();
-    setDisplay(true);
-  };
+  const clear = () => window.clearInterval(id.current)
 
-  const updateField = (e) => {
-    setValues({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  };
+  React.useEffect(() => {
+    id.current = window.setInterval(() => {
+      setTimeLeft((time) => time - 1)
+    }, 1000)
 
+    return clear
+  }, [])
+
+  React.useEffect(() => {
+    if (timeLeft === 0) {
+      clear()
+    }
+  }, [timeLeft])
+  
   return (
-    <form onSubmit={printValues}>
-      <div>
-        <label htmlFor="Usuario">
-          Usuario:
-          <input
-            value={form.usuario|| ""}
-            name="usuario"
-            onChange={updateField}
-          />
-        </label>
-      </div>
-      <br />
-      <div>
-        <label htmlFor="Nombre">
-          Nombre:
-          <input
-            value={form.nombre || ""}
-            name="nombre"
-            type="text"
-            onChange={updateField}
-          />
-        </label>
-      </div>
-      <br />
-      <div>
-        <label htmlFor="Edad">
-          Edad:
-          <input value={form.edad || ""} name="edad" type='number' onChange={updateField} />
-        </label>
-      </div>
-      <br />
-      <button>Enviar</button>
-      {display && (
-        <>
-          <h4>Información</h4>
-          <ul>
-            <li>Usuario: {form.usuario.toUpperCase()}</li>
-            <li>Nombre: {form.nombre.toUpperCase()}</li>
-            <li>Edad: {form.edad}</li>
-          </ul>
-        </>
-      )}
-    </form>
+    <div className="App">
+      <h1>{count}</h1>
+      <h3>Tiempo: {timeLeft} segundos</h3>
+      {timeLeft === 0 ? null : 
+        <button onClick={() => setCount((c) => c + 1)}>
+          +
+        </button>}
+    </div>
   );
 }
