@@ -1,35 +1,72 @@
 import React, { useState } from 'react';
 import './App.css'; 
 
-const Progreso = () => {
-  const [porcentaje, setPorcentaje] = useState(0); 
+ 
+const persona = {
+  usuario: "",
+  nombre: "",
+  edad: ""
+};
 
-  const handleChange = (event) => {
-    let valor = event.target.value;
+export default function App() {
+  const [form, setValues] = useState(persona);
+  const [display, setDisplay] = useState(false);
 
-    if (valor < 0) {
-      valor = 0;
-    } else if (valor > 100) {
-      valor = 100;
-    }
-    setPorcentaje(valor); 
+  const printValues = (e) => {
+    e.preventDefault();
+    setDisplay(true);
+  };
+
+  const updateField = (e) => {
+    setValues({
+      ...form,
+      [e.target.name]: e.target.value
+    });
   };
 
   return (
-    <div className="contenedor">
-      <input
-        type="number"
-        value={porcentaje}
-        onChange={handleChange}
-        min="0"
-        max="100"
-        placeholder="Ingresa un porcentaje (1-100)"
-      />
-      <div className="barra">
-        <div className="progreso-barra" style={{ width: `${porcentaje}%` }}>{porcentaje}%</div>
+    <form onSubmit={printValues}>
+      <div>
+        <label htmlFor="Usuario">
+          Usuario:
+          <input
+            value={form.usuario|| ""}
+            name="usuario"
+            onChange={updateField}
+          />
+        </label>
       </div>
-    </div>
+      <br />
+      <div>
+        <label htmlFor="Nombre">
+          Nombre:
+          <input
+            value={form.nombre || ""}
+            name="nombre"
+            type="text"
+            onChange={updateField}
+          />
+        </label>
+      </div>
+      <br />
+      <div>
+        <label htmlFor="Edad">
+          Edad:
+          <input value={form.edad || ""} name="edad" type='number' onChange={updateField} />
+        </label>
+      </div>
+      <br />
+      <button>Enviar</button>
+      {display && (
+        <>
+          <h4>Información</h4>
+          <ul>
+            <li>Usuario: {form.usuario.toUpperCase()}</li>
+            <li>Nombre: {form.nombre.toUpperCase()}</li>
+            <li>Edad: {form.edad}</li>
+          </ul>
+        </>
+      )}
+    </form>
   );
-};
-
-export default Progreso;
+}
