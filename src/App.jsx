@@ -10,7 +10,6 @@ function App() {
   return (
     <div>
       <h1 className='hello'>HELLO REACT ROUTER</h1>
-      
       <Routes>
         <Route path='/' element={<Navbar />}>
         <Route path='/' element={<Inicio />}/>
@@ -22,5 +21,4 @@ function App() {
     
   );
 }
-
 export default App;
