@@ -1,35 +1,26 @@
-import React, { useState } from 'react';
-import './App.css'; 
+import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./pages/Navbar";
+import Inicio from "./pages/inicio";
+import Jeison from "./pages/jeison";
+import Bmx from "./pages/bmx";
 
-export default function App() {
-  const [count, setCount] = React.useState(0)
-  const [timeLeft, setTimeLeft] = React.useState(10)
-  const id = React.useRef(null)
-
-  const clear = () => window.clearInterval(id.current)
-
-  React.useEffect(() => {
-    id.current = window.setInterval(() => {
-      setTimeLeft((time) => time - 1)
-    }, 1000)
-
-    return clear
-  }, [])
-
-  React.useEffect(() => {
-    if (timeLeft === 0) {
-      clear()
-    }
-  }, [timeLeft])
+function App() {
   
   return (
-    <div className="App">
-      <h1>{count}</h1>
-      <h3>Tiempo: {timeLeft} segundos</h3>
-      {timeLeft === 0 ? null : 
-        <button onClick={() => setCount((c) => c + 1)}>
-          +
-        </button>}
+    <div>
+      <h1 className='hello'>HELLO REACT ROUTER</h1>
+      
+      <Routes>
+        <Route path='/' element={<Navbar />}>
+        <Route path='/' element={<Inicio />}/>
+        <Route path='jeison' element={<Jeison />}/>
+        <Route path='bmx' element={<Bmx />}/>
+        </Route>
+      </Routes>      
     </div>
+    
   );
 }
+
+export default App;
