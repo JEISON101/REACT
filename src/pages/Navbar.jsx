@@ -4,9 +4,7 @@ const Navbar = () => {
     return ( 
     <div>
         <div>
-            <Link to="/" className="opciones">inicio</Link>
-            <Link to="/Jeison" className="opciones">jeison</Link>
-            <Link to="/Bmx" className="opciones">bmx</Link>
+            <Link to="/"><button className="enviar" >Enviar</button></Link>
         </div>
         <Outlet/>
     </div>

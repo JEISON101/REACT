@@ -1,20 +1,20 @@
 import './App.css';
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./pages/Navbar";
-import Inicio from "./pages/inicio";
-import Jeison from "./pages/jeison";
-import Bmx from "./pages/bmx";
+import {Routes, Route} from "react-router-dom";
+import Enviar from "./pages/navbar";
+import Enviar from "./pages/submit";
 
 function App() {
-  
+
   return (
     <div>
-      <h1 className='hello'>HELLO REACT ROUTER</h1>
+      <h1>hola, ingresa tu nombre y edad</h1>
+      <br />
+      <input type="text" placeholder='Nombre' />
+      <br />
+      <input type="number" placeholder='Edad' />
       <Routes>
         <Route path='/' element={<Navbar />}>
-        <Route path='/' element={<Inicio />}/>
-        <Route path='jeison' element={<Jeison />}/>
-        <Route path='bmx' element={<Bmx />}/>
+        <Route path='/' element={<Enviar />}/>
         </Route>
       </Routes>      
     </div>
